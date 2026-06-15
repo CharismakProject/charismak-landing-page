@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  BadgeCheck,
   Download,
   Mail,
   MapPin,
@@ -28,25 +29,39 @@ export default function HomePage() {
     person.name.includes("Abiodun Christopher Akinola")
   );
 
+  const whatsappLink =
+    "https://wa.me/2347066619598?text=Hello%20Charismak%20Project%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project.";
+
   return (
     <main className="overflow-hidden bg-[#F5F7FA] pt-20">
-      <section className="bg-[#0D3B66] px-5 py-20 text-white md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
-            <SectionLabel>{company.rcNumber}</SectionLabel>
+      <section className="relative bg-[#0D3B66] px-5 py-24 text-white md:px-8">
+        <div className="absolute inset-0">
+          <Image
+            src={featuredProjects[0]?.cover || "/Images/Projects/Coco-Gwarimpa/1.jpg"}
+            alt="Charismak Project Nigeria Limited"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-[#0D3B66]/85" />
+        </div>
 
-            <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
+        <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <SectionLabel>
+              {company.rcNumber} • Digital Company Profile
+            </SectionLabel>
+
+            <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-6xl">
               Professional construction, engineering & project management
               solutions.
             </h1>
-          </div>
 
-          <div>
-            <p className="max-w-2xl text-base leading-8 text-white/75">
-              {company.name} delivers building construction, civil engineering,
-              renovation, steel fabrication, architectural finishing,
-              consultancy, and project management services with disciplined
-              execution and technical control.
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/80">
+              Building construction, civil engineering, renovation, steel
+              fabrication, consultancy, and project delivery services across
+              Nigeria and beyond.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -59,10 +74,35 @@ export default function HomePage() {
 
               <Link
                 href="#projects"
-                className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-semibold text-white transition hover:border-[#C8A45D]"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-sm font-semibold text-white transition hover:border-[#C8A45D]"
               >
                 View Projects <ArrowRight className="h-5 w-5" />
               </Link>
+            </div>
+          </div>
+
+          <div className="border border-white/15 bg-white/10 p-6 backdrop-blur">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#C8A45D]">
+              Client-First • Integrity • Transparency • Innovation
+            </p>
+
+            <p className="mt-5 text-base leading-8 text-white/80">
+              {company.name} is positioned as a modern Nigerian construction
+              company delivering reliable built-environment solutions through
+              quality supervision, disciplined execution, and technical project
+              control.
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {company.values.map((value) => (
+                <div
+                  key={value}
+                  className="flex items-center gap-3 border border-white/15 bg-white/10 p-4 text-sm font-semibold"
+                >
+                  <BadgeCheck className="h-5 w-5 text-[#C8A45D]" />
+                  {value}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -86,7 +126,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#F5F7FA] px-5 py-14 md:px-8">
+      <section className="bg-[#F5F7FA] px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <SectionLabel>Corporate Profile</SectionLabel>
@@ -106,21 +146,19 @@ export default function HomePage() {
               {company.overview}
             </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {company.values.map((value) => (
-                <div
-                  key={value}
-                  className="border border-[#0D3B66]/10 bg-white p-4 font-semibold text-[#0D3B66] shadow-sm"
-                >
-                  {value}
-                </div>
-              ))}
+            <div className="mt-8">
+              <Link
+                href="/company-profile.pdf"
+                className="inline-flex items-center gap-3 bg-[#0D3B66] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#8B1E00]"
+              >
+                View / Download Full Profile <Download className="h-5 w-5" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-5 py-14 md:px-8">
+      <section className="bg-white px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionLabel>Vision & Mission</SectionLabel>
 
@@ -148,21 +186,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-14 md:px-8">
+      <section className="bg-[#F5F7FA] px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionLabel>Business Areas</SectionLabel>
 
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-[#0D3B66] md:text-5xl">
-              Services across the full construction value chain.
-            </h2>
-          </div>
+          <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-[#0D3B66] md:text-5xl">
+            Services across the full construction value chain.
+          </h2>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {services.map(({ title, description, icon: Icon }) => (
               <article
                 key={title}
-                className="border border-[#0D3B66]/10 bg-[#F5F7FA] p-6 transition hover:border-[#C8A45D] hover:bg-white hover:shadow-lg"
+                className="border border-[#0D3B66]/10 bg-white p-6 transition hover:border-[#C8A45D] hover:shadow-lg"
               >
                 <Icon className="h-7 w-7 text-[#8B1E00]" />
 
@@ -179,24 +215,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="projects" className="bg-[#F5F7FA] px-5 py-14 md:px-8">
+      <section id="projects" className="bg-white px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionLabel>Project References</SectionLabel>
 
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-[#0D3B66] md:text-5xl">
-              Selected works across construction, interiors, civil works,
-              residential development, and project supervision.
-            </h2>
-          </div>
+          <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-[#0D3B66] md:text-5xl">
+            Selected works across construction, interiors, civil works,
+            residential development, and project supervision.
+          </h2>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {featuredProjects.map((project) => (
               <article
                 key={project.slug}
-                className="group overflow-hidden bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                className="group overflow-hidden bg-[#F5F7FA] shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="relative h-[230px] overflow-hidden bg-[#0D3B66]">
+                <div className="relative h-[250px] overflow-hidden bg-[#0D3B66]">
                   <Image
                     src={project.cover}
                     alt={project.title}
@@ -220,7 +254,7 @@ export default function HomePage() {
                     {project.category}
                   </p>
 
-                  <h3 className="text-2xl font-bold leading-tight text-[#0D3B66] group-hover:text-[#8B1E00]">
+                  <h3 className="text-2xl font-bold leading-tight text-[#0D3B66]">
                     {project.title}
                   </h3>
 
@@ -257,7 +291,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-14 md:px-8">
+      <section className="bg-[#F5F7FA] px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionLabel>HSE, Quality & Delivery</SectionLabel>
@@ -277,7 +311,7 @@ export default function HomePage() {
             {trustItems.map(({ title, text, icon: Icon }) => (
               <article
                 key={title}
-                className="border border-[#0D3B66]/10 bg-[#F5F7FA] p-6 transition hover:bg-white hover:shadow-lg"
+                className="border border-[#0D3B66]/10 bg-white p-6 transition hover:shadow-lg"
               >
                 <Icon className="h-7 w-7 text-[#8B1E00]" />
 
@@ -292,16 +326,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#0D3B66] px-5 py-16 text-white md:px-8">
+      <section className="bg-[#0D3B66] px-5 py-24 text-white md:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <div className="relative h-[420px] overflow-hidden bg-white/10">
+          <div className="relative h-[520px] overflow-hidden border border-white/15 bg-white/10">
             {projectDirector && (
               <Image
                 src={projectDirector.image}
                 alt={projectDirector.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
+                className="object-contain"
               />
             )}
           </div>
@@ -318,10 +352,11 @@ export default function HomePage() {
             </p>
 
             <p className="mt-6 max-w-2xl text-base leading-8 text-white/75">
-              At Charismak Project Nigeria Limited, we are committed to
-              delivering construction and engineering projects with integrity,
-              technical excellence, accountability, transparency, and disciplined
-              project execution.
+              With over 9 years of practical construction experience across
+              Nigeria and East Africa, Abiodun Christopher Akinola leads
+              Charismak Project Nigeria Limited with a commitment to technical
+              excellence, disciplined project delivery, transparent supervision,
+              and sustainable infrastructure development.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -333,17 +368,18 @@ export default function HomePage() {
               </Link>
 
               <Link
-                href={`mailto:${company.email}`}
+                href={whatsappLink}
+                target="_blank"
                 className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-semibold text-white transition hover:border-[#C8A45D]"
               >
-                Contact Us <Mail className="h-5 w-5" />
+                Chat on WhatsApp <Phone className="h-5 w-5" />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-5 py-14 md:px-8">
+      <section className="bg-white px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionLabel>Contact</SectionLabel>
 
@@ -389,12 +425,27 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-4">
             <Link
               href="/company-profile.pdf"
               className="inline-flex items-center gap-3 bg-[#0D3B66] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#8B1E00]"
             >
               Download Company Profile <Download className="h-5 w-5" />
+            </Link>
+
+            <Link
+              href={whatsappLink}
+              target="_blank"
+              className="inline-flex items-center gap-3 border border-[#0D3B66]/20 px-6 py-4 text-sm font-bold text-[#0D3B66] transition hover:border-[#8B1E00] hover:text-[#8B1E00]"
+            >
+              WhatsApp Us <Phone className="h-5 w-5" />
+            </Link>
+
+            <Link
+              href={`mailto:${company.email}`}
+              className="inline-flex items-center gap-3 border border-[#0D3B66]/20 px-6 py-4 text-sm font-bold text-[#0D3B66] transition hover:border-[#8B1E00] hover:text-[#8B1E00]"
+            >
+              Send Email <Mail className="h-5 w-5" />
             </Link>
           </div>
         </div>
