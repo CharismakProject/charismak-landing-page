@@ -4,7 +4,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
-  ClipboardCheck,
   Download,
   Mail,
   MapPin,
@@ -25,8 +24,49 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export default function HomePage() {
   const featuredProjects = projects.slice(0, 6);
-  const leadership = people.slice(0, 6);
-  const projectDirector = people.find((person) =>
+
+  const leadership = people
+    .filter((person) =>
+      [
+        "Abiodun Christopher Akinola",
+        "Seyi Fituyi",
+        "Adetiloye O. Adesida",
+        "Toyin",
+      ].some((name) => person.name.includes(name))
+    )
+    .map((person) => {
+      if (person.name.includes("Abiodun Christopher Akinola")) {
+        return {
+          ...person,
+          role: "Executive Director / General Project Director — North",
+        };
+      }
+
+      if (person.name.includes("Seyi Fituyi")) {
+        return {
+          ...person,
+          role: "Project Director — South",
+        };
+      }
+
+      if (person.name.includes("Adetiloye O. Adesida")) {
+        return {
+          ...person,
+          role: "Non-Executive Director",
+        };
+      }
+
+      if (person.name.includes("Toyin")) {
+        return {
+          ...person,
+          role: "Company Secretary",
+        };
+      }
+
+      return person;
+    });
+
+  const projectDirector = leadership.find((person) =>
     person.name.includes("Abiodun Christopher Akinola")
   );
 
@@ -35,10 +75,15 @@ export default function HomePage() {
 
   return (
     <main className="overflow-hidden bg-[#F5F7FA] pt-20">
-      <section id="home" className="relative min-h-[88vh] bg-[#0D3B66] px-5 py-24 text-white md:px-8">
+      <section
+        id="home"
+        className="relative min-h-[88vh] bg-[#0D3B66] px-5 py-24 text-white md:px-8"
+      >
         <div className="absolute inset-0">
           <Image
-            src={featuredProjects[0]?.cover || "/Images/Projects/Coco-Gwarimpa/1.jpg"}
+            src={
+              featuredProjects[0]?.cover || "/Images/Projects/Coco-Gwarimpa/1.jpg"
+            }
             alt="Charismak Project Nigeria Limited"
             fill
             priority
@@ -50,7 +95,9 @@ export default function HomePage() {
 
         <div className="relative mx-auto flex min-h-[68vh] max-w-7xl items-center">
           <div className="max-w-5xl">
-            <SectionLabel>{company.rcNumber} • Digital Company Profile</SectionLabel>
+            <SectionLabel>
+              {company.rcNumber} • Digital Company Profile
+            </SectionLabel>
 
             <h1 className="text-4xl font-black leading-tight tracking-tight md:text-7xl">
               Building reliable projects through engineering excellence.
@@ -58,21 +105,31 @@ export default function HomePage() {
 
             <p className="mt-6 max-w-3xl text-base leading-8 text-white/80 md:text-lg">
               {company.name} delivers building construction, civil engineering,
-              renovation, steel fabrication, procurement, consultancy, and
-              project management solutions with disciplined execution and
-              technical control.
+              renovation, steel fabrication, procurement, consultancy, and project
+              management solutions with disciplined execution and technical
+              control.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
-              <Link href="/company-profile.pdf" className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]">
+              <Link
+                href="/company-profile.pdf"
+                className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
+              >
                 Download Company Profile <Download className="h-5 w-5" />
               </Link>
 
-              <Link href="#projects" className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]">
+              <Link
+                href="#projects"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]"
+              >
                 View Projects <ArrowRight className="h-5 w-5" />
               </Link>
 
-              <Link href={whatsappLink} target="_blank" className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]">
+              <Link
+                href={whatsappLink}
+                target="_blank"
+                className="inline-flex items-center gap-3 border border-white/30 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]"
+              >
                 WhatsApp Us <Phone className="h-5 w-5" />
               </Link>
             </div>
@@ -89,8 +146,12 @@ export default function HomePage() {
             ["PDF", "Downloadable Profile"],
           ].map(([value, label]) => (
             <div key={label}>
-              <p className="text-2xl font-black text-[#0D3B66] md:text-3xl">{value}</p>
-              <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-[#3A4653]">{label}</p>
+              <p className="text-2xl font-black text-[#0D3B66] md:text-3xl">
+                {value}
+              </p>
+              <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-[#3A4653]">
+                {label}
+              </p>
             </div>
           ))}
         </div>
@@ -101,17 +162,25 @@ export default function HomePage() {
           <div>
             <SectionLabel>Company</SectionLabel>
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-[#0D3B66] md:text-5xl">
-              A modern Nigerian construction company built for disciplined project delivery.
+              A modern Nigerian construction company built for disciplined
+              project delivery.
             </h2>
           </div>
 
           <div>
-            <p className="text-base leading-8 text-[#3A4653]">{company.about}</p>
-            <p className="mt-5 text-base leading-8 text-[#3A4653]">{company.overview}</p>
+            <p className="text-base leading-8 text-[#3A4653]">
+              {company.about}
+            </p>
+            <p className="mt-5 text-base leading-8 text-[#3A4653]">
+              {company.overview}
+            </p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {company.values.map((value) => (
-                <div key={value} className="flex items-center gap-3 border border-[#0D3B66]/10 bg-white p-4 font-bold text-[#0D3B66] shadow-sm">
+                <div
+                  key={value}
+                  className="flex items-center gap-3 border border-[#0D3B66]/10 bg-white p-4 font-bold text-[#0D3B66] shadow-sm"
+                >
                   <BadgeCheck className="h-5 w-5 text-[#8B1E00]" />
                   {value}
                 </div>
@@ -128,14 +197,22 @@ export default function HomePage() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="border border-[#0D3B66]/10 bg-[#F5F7FA] p-8">
               <Building2 className="h-8 w-8 text-[#8B1E00]" />
-              <h3 className="mt-5 text-2xl font-bold text-[#0D3B66]">Our Vision</h3>
-              <p className="mt-4 text-base leading-8 text-[#3A4653]">{company.vision}</p>
+              <h3 className="mt-5 text-2xl font-bold text-[#0D3B66]">
+                Our Vision
+              </h3>
+              <p className="mt-4 text-base leading-8 text-[#3A4653]">
+                {company.vision}
+              </p>
             </div>
 
             <div className="border border-[#0D3B66]/10 bg-[#F5F7FA] p-8">
               <ShieldCheck className="h-8 w-8 text-[#8B1E00]" />
-              <h3 className="mt-5 text-2xl font-bold text-[#0D3B66]">Our Mission</h3>
-              <p className="mt-4 text-base leading-8 text-[#3A4653]">{company.mission}</p>
+              <h3 className="mt-5 text-2xl font-bold text-[#0D3B66]">
+                Our Mission
+              </h3>
+              <p className="mt-4 text-base leading-8 text-[#3A4653]">
+                {company.mission}
+              </p>
             </div>
           </div>
         </div>
@@ -151,10 +228,15 @@ export default function HomePage() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {services.map(({ title, description, icon: Icon }) => (
-              <article key={title} className="border border-white/10 bg-white/10 p-6 transition hover:-translate-y-1 hover:border-[#C8A45D] hover:bg-white hover:text-[#0D3B66]">
+              <article
+                key={title}
+                className="border border-white/10 bg-white/10 p-6 transition hover:-translate-y-1 hover:border-[#C8A45D] hover:bg-white hover:text-[#0D3B66]"
+              >
                 <Icon className="h-7 w-7 text-[#C8A45D]" />
                 <h3 className="mt-6 text-lg font-semibold">{title}</h3>
-                <p className="mt-3 text-sm leading-7 opacity-80">{description}</p>
+                <p className="mt-3 text-sm leading-7 opacity-80">
+                  {description}
+                </p>
               </article>
             ))}
           </div>
@@ -166,12 +248,16 @@ export default function HomePage() {
           <SectionLabel>Projects</SectionLabel>
 
           <h2 className="max-w-4xl text-3xl font-semibold leading-tight tracking-tight text-[#0D3B66] md:text-5xl">
-            Selected project references across construction, interiors, civil works, steel fabrication, and supervision.
+            Selected project references across construction, interiors, civil
+            works, steel fabrication, and supervision.
           </h2>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {featuredProjects.map((project) => (
-              <article key={project.slug} className="group overflow-hidden bg-[#F5F7FA] shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+              <article
+                key={project.slug}
+                className="group overflow-hidden bg-[#F5F7FA] shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
                 <div className="relative h-[260px] overflow-hidden bg-[#0D3B66]">
                   <Image
                     src={project.cover}
@@ -191,13 +277,25 @@ export default function HomePage() {
                 </div>
 
                 <div className="p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C8A45D]">{project.category}</p>
-                  <h3 className="mt-3 text-2xl font-bold leading-tight text-[#0D3B66]">{project.title}</h3>
-                  <p className="mt-3 line-clamp-3 text-sm leading-7 text-[#3A4653]">{project.summary}</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C8A45D]">
+                    {project.category}
+                  </p>
+                  <h3 className="mt-3 text-2xl font-bold leading-tight text-[#0D3B66]">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 line-clamp-3 text-sm leading-7 text-[#3A4653]">
+                    {project.summary}
+                  </p>
 
                   <div className="mt-5 grid gap-2 text-sm text-[#3A4653]">
-                    <p><span className="font-bold text-[#0D3B66]">Location:</span> {project.location}</p>
-                    <p><span className="font-bold text-[#0D3B66]">Status:</span> {project.status}</p>
+                    <p>
+                      <span className="font-bold text-[#0D3B66]">Location:</span>{" "}
+                      {project.location}
+                    </p>
+                    <p>
+                      <span className="font-bold text-[#0D3B66]">Status:</span>{" "}
+                      {project.status}
+                    </p>
                   </div>
                 </div>
               </article>
@@ -205,7 +303,10 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10">
-            <Link href="/company-profile.pdf" className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]">
+            <Link
+              href="/company-profile.pdf"
+              className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
+            >
               View Full Project Profile <Download className="h-5 w-5" />
             </Link>
           </div>
@@ -228,10 +329,17 @@ export default function HomePage() {
 
           <div className="grid gap-5 sm:grid-cols-3">
             {trustItems.map(({ title, text, icon: Icon }) => (
-              <article key={title} className="border border-[#0D3B66]/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg">
+              <article
+                key={title}
+                className="border border-[#0D3B66]/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"
+              >
                 <Icon className="h-7 w-7 text-[#8B1E00]" />
-                <h3 className="mt-6 text-lg font-bold text-[#0D3B66]">{title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#3A4653]">{text}</p>
+                <h3 className="mt-6 text-lg font-bold text-[#0D3B66]">
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-[#3A4653]">
+                  {text}
+                </p>
               </article>
             ))}
           </div>
@@ -243,27 +351,36 @@ export default function HomePage() {
           <SectionLabel>Leadership</SectionLabel>
 
           <h2 className="max-w-4xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
-            Governance and project delivery leadership.
+            Governance, corporate support, and project delivery leadership.
           </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {leadership.map((person) => (
-              <article key={person.name} className="overflow-hidden border border-white/15 bg-white/10">
-                <div className="relative h-[330px] bg-white/5">
+              <article
+                key={person.name}
+                className="overflow-hidden border border-white/15 bg-white/10"
+              >
+                <div className="relative h-[300px] bg-white/5">
                   <Image
                     src={person.image}
                     alt={person.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 25vw"
                     className="object-contain"
                   />
                 </div>
 
                 <div className="p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C8A45D]">{person.category}</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C8A45D]">
+                    {person.category}
+                  </p>
                   <h3 className="mt-3 text-xl font-bold">{person.name}</h3>
-                  <p className="mt-2 text-sm font-semibold text-white/70">{person.role}</p>
-                  <p className="mt-3 text-sm leading-7 text-white/65">{person.bio}</p>
+                  <p className="mt-2 text-sm font-semibold text-white/70">
+                    {person.role}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-white/65">
+                    {person.bio}
+                  </p>
                 </div>
               </article>
             ))}
@@ -293,7 +410,7 @@ export default function HomePage() {
             </h2>
 
             <p className="mt-3 text-lg font-semibold text-[#8B1E00]">
-              Managing Director & Project Director
+              Executive Director / General Project Director — North
             </p>
 
             <p className="mt-6 max-w-2xl text-base leading-8 text-[#3A4653]">
@@ -304,11 +421,18 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/company-profile.pdf" className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]">
+              <Link
+                href="/company-profile.pdf"
+                className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
+              >
                 Download Profile <Download className="h-5 w-5" />
               </Link>
 
-              <Link href={whatsappLink} target="_blank" className="inline-flex items-center gap-3 border border-[#0D3B66]/20 px-6 py-4 text-sm font-bold text-[#0D3B66] transition hover:border-[#8B1E00] hover:text-[#8B1E00]">
+              <Link
+                href={whatsappLink}
+                target="_blank"
+                className="inline-flex items-center gap-3 border border-[#0D3B66]/20 px-6 py-4 text-sm font-bold text-[#0D3B66] transition hover:border-[#8B1E00] hover:text-[#8B1E00]"
+              >
                 Chat on WhatsApp <Phone className="h-5 w-5" />
               </Link>
             </div>
@@ -338,34 +462,50 @@ export default function HomePage() {
                 <Phone className="h-6 w-6 text-[#C8A45D]" />
                 <h3 className="mt-4 font-bold">Phone</h3>
                 {company.phones.map((phone) => (
-                  <p key={phone} className="mt-2 text-sm text-white/75">{phone}</p>
+                  <p key={phone} className="mt-2 text-sm text-white/75">
+                    {phone}
+                  </p>
                 ))}
               </div>
 
               <div>
                 <Mail className="h-6 w-6 text-[#C8A45D]" />
                 <h3 className="mt-4 font-bold">Email</h3>
-                <p className="mt-2 break-words text-sm text-white/75">{company.email}</p>
+                <p className="mt-2 break-words text-sm text-white/75">
+                  {company.email}
+                </p>
               </div>
 
               <div>
                 <MapPin className="h-6 w-6 text-[#C8A45D]" />
                 <h3 className="mt-4 font-bold">Office Locations</h3>
                 {company.addresses.map((address) => (
-                  <p key={address} className="mt-2 text-sm text-white/75">{address}</p>
+                  <p key={address} className="mt-2 text-sm text-white/75">
+                    {address}
+                  </p>
                 ))}
               </div>
 
               <div className="flex flex-wrap gap-4 pt-2">
-                <Link href={whatsappLink} target="_blank" className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]">
+                <Link
+                  href={whatsappLink}
+                  target="_blank"
+                  className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
+                >
                   WhatsApp Us <Phone className="h-5 w-5" />
                 </Link>
 
-                <Link href={`mailto:${company.email}`} className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]">
+                <Link
+                  href={`mailto:${company.email}`}
+                  className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]"
+                >
                   Send Email <Mail className="h-5 w-5" />
                 </Link>
 
-                <Link href="/company-profile.pdf" className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]">
+                <Link
+                  href="/company-profile.pdf"
+                  className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]"
+                >
                   Profile PDF <Download className="h-5 w-5" />
                 </Link>
               </div>
