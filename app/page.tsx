@@ -8,7 +8,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  PlayCircle,
   ShieldCheck,
 } from "lucide-react";
 
@@ -31,7 +30,7 @@ export default function HomePage() {
         "Abiodun Christopher Akinola",
         "Seyi Fituyi",
         "Adetiloye O. Adesida",
-        "Toyin",
+        "Akinola Toyin",
       ].some((name) => person.name.includes(name))
     )
     .map((person) => {
@@ -45,7 +44,7 @@ export default function HomePage() {
       if (person.name.includes("Seyi Fituyi")) {
         return {
           ...person,
-          role: "Project Director — South",
+          role: "Non-Executive Director / Project Director — South",
         };
       }
 
@@ -56,7 +55,7 @@ export default function HomePage() {
         };
       }
 
-      if (person.name.includes("Toyin")) {
+      if (person.name.includes("Akinola Toyin")) {
         return {
           ...person,
           role: "Company Secretary",
@@ -68,6 +67,10 @@ export default function HomePage() {
 
   const projectDirector = leadership.find((person) =>
     person.name.includes("Abiodun Christopher Akinola")
+  );
+
+  const otherLeadership = leadership.filter(
+    (person) => !person.name.includes("Abiodun Christopher Akinola")
   );
 
   const whatsappLink =
@@ -100,14 +103,14 @@ export default function HomePage() {
             </SectionLabel>
 
             <h1 className="text-4xl font-black leading-tight tracking-tight md:text-7xl">
-              Building reliable projects through engineering excellence.
+              Building value through construction excellence.
             </h1>
 
             <p className="mt-6 max-w-3xl text-base leading-8 text-white/80 md:text-lg">
-              {company.name} delivers building construction, civil engineering,
-              renovation, steel fabrication, procurement, consultancy, and project
-              management solutions with disciplined execution and technical
-              control.
+              {company.name} delivers construction, engineering, renovation,
+              steel fabrication, project management, procurement, and
+              infrastructure solutions across Nigeria with a commitment to
+              quality, accountability, and professional execution.
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
@@ -252,50 +255,61 @@ export default function HomePage() {
             works, steel fabrication, and supervision.
           </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {featuredProjects.map((project) => (
+          <div className="mt-10 grid gap-8">
+            {featuredProjects.map((project, index) => (
               <article
                 key={project.slug}
-                className="group overflow-hidden bg-[#F5F7FA] shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                className="grid overflow-hidden bg-[#F5F7FA] shadow-sm transition hover:shadow-xl lg:grid-cols-[0.95fr_1.05fr]"
               >
-                <div className="relative h-[260px] overflow-hidden bg-[#0D3B66]">
+                <div
+                  className={`relative min-h-[340px] bg-[#0D3B66] ${
+                    index % 2 === 1 ? "lg:order-2" : ""
+                  }`}
+                >
                   <Image
                     src={project.cover}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B66]/90 via-[#0D3B66]/20 to-transparent" />
-
-                  {project.videos.length > 0 && (
-                    <div className="absolute left-4 top-4 inline-flex items-center gap-2 bg-[#8B1E00] px-3 py-2 text-xs font-bold uppercase tracking-wide text-white">
-                      <PlayCircle className="h-4 w-4 text-[#C8A45D]" />
-                      Video
-                    </div>
-                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B66]/70 via-transparent to-transparent" />
+                  <div className="absolute left-5 top-5 bg-[#8B1E00] px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white">
+                    {project.status}
+                  </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-8 lg:p-10">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C8A45D]">
                     {project.category}
                   </p>
-                  <h3 className="mt-3 text-2xl font-bold leading-tight text-[#0D3B66]">
+
+                  <h3 className="mt-4 text-3xl font-bold leading-tight text-[#0D3B66]">
                     {project.title}
                   </h3>
-                  <p className="mt-3 line-clamp-3 text-sm leading-7 text-[#3A4653]">
+
+                  <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-[#8B1E00]">
+                    <MapPin className="h-4 w-4" />
+                    {project.location}
+                  </div>
+
+                  <p className="mt-5 text-base leading-8 text-[#3A4653]">
                     {project.summary}
                   </p>
 
-                  <div className="mt-5 grid gap-2 text-sm text-[#3A4653]">
-                    <p>
-                      <span className="font-bold text-[#0D3B66]">Location:</span>{" "}
-                      {project.location}
-                    </p>
-                    <p>
-                      <span className="font-bold text-[#0D3B66]">Status:</span>{" "}
-                      {project.status}
-                    </p>
+                  <div className="mt-6">
+                    <h4 className="font-bold text-[#0D3B66]">Scope / Services</h4>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {project.services.map((service) => (
+                        <span
+                          key={service}
+                          className="bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#3A4653]"
+                        >
+                          {service}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </article>
@@ -322,8 +336,8 @@ export default function HomePage() {
             </h2>
             <p className="mt-5 text-base leading-8 text-[#3A4653]">
               Our delivery approach emphasizes clear coordination, quality checks,
-              controlled procurement, project supervision, and proper documentation
-              from planning to handover.
+              controlled procurement, project supervision, and proper
+              documentation from planning to handover.
             </p>
           </div>
 
@@ -354,8 +368,60 @@ export default function HomePage() {
             Governance, corporate support, and project delivery leadership.
           </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {leadership.map((person) => (
+          {projectDirector && (
+            <div className="mt-10 grid overflow-hidden border border-white/15 bg-white/10 lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="relative min-h-[480px] bg-white/5">
+                <Image
+                  src={projectDirector.image}
+                  alt={projectDirector.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-contain"
+                />
+              </div>
+
+              <div className="p-8 lg:p-10">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C8A45D]">
+                  Executive Leadership
+                </p>
+
+                <h3 className="mt-4 text-3xl font-bold md:text-5xl">
+                  {projectDirector.name}
+                </h3>
+
+                <p className="mt-3 text-lg font-semibold text-[#C8A45D]">
+                  {projectDirector.role}
+                </p>
+
+                <p className="mt-6 max-w-2xl text-base leading-8 text-white/70">
+                  Abiodun Christopher Akinola leads Charismak Project Nigeria
+                  Limited with a commitment to technical excellence, disciplined
+                  project delivery, transparent supervision, practical construction
+                  management, and sustainable infrastructure development.
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link
+                    href="/company-profile.pdf"
+                    className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
+                  >
+                    Download Profile <Download className="h-5 w-5" />
+                  </Link>
+
+                  <Link
+                    href={whatsappLink}
+                    target="_blank"
+                    className="inline-flex items-center gap-3 border border-white/25 px-6 py-4 text-sm font-bold text-white transition hover:border-[#C8A45D]"
+                  >
+                    Chat on WhatsApp <Phone className="h-5 w-5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {otherLeadership.map((person) => (
               <article
                 key={person.name}
                 className="overflow-hidden border border-white/15 bg-white/10"
@@ -365,7 +431,7 @@ export default function HomePage() {
                     src={person.image}
                     alt={person.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-contain"
                   />
                 </div>
@@ -388,58 +454,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="director" className="bg-white px-5 py-20 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <div className="relative h-[520px] overflow-hidden border border-[#0D3B66]/10 bg-[#F5F7FA]">
-            {projectDirector && (
-              <Image
-                src={projectDirector.image}
-                alt={projectDirector.name}
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-contain"
-              />
-            )}
-          </div>
-
-          <div>
-            <SectionLabel>Project Director</SectionLabel>
-
-            <h2 className="text-3xl font-bold leading-tight text-[#0D3B66] md:text-5xl">
-              {projectDirector?.name}
-            </h2>
-
-            <p className="mt-3 text-lg font-semibold text-[#8B1E00]">
-              Executive Director / General Project Director — North
-            </p>
-
-            <p className="mt-6 max-w-2xl text-base leading-8 text-[#3A4653]">
-              Abiodun Christopher Akinola leads Charismak Project Nigeria Limited
-              with a commitment to technical excellence, disciplined project
-              delivery, transparent supervision, practical construction
-              management, and sustainable infrastructure development.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/company-profile.pdf"
-                className="inline-flex items-center gap-3 bg-[#8B1E00] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
-              >
-                Download Profile <Download className="h-5 w-5" />
-              </Link>
-
-              <Link
-                href={whatsappLink}
-                target="_blank"
-                className="inline-flex items-center gap-3 border border-[#0D3B66]/20 px-6 py-4 text-sm font-bold text-[#0D3B66] transition hover:border-[#8B1E00] hover:text-[#8B1E00]"
-              >
-                Chat on WhatsApp <Phone className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="contact" className="bg-[#0D3B66] px-5 py-20 text-white md:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
@@ -451,8 +465,8 @@ export default function HomePage() {
 
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/75">
               Contact Charismak Project Nigeria Limited for building construction,
-              civil engineering, renovation, steel fabrication, project management,
-              and finishing works.
+              civil engineering, renovation, steel fabrication, project
+              management, and finishing works.
             </p>
           </div>
 
