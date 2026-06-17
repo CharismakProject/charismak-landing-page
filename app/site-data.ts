@@ -38,13 +38,11 @@ export const company = {
   phones: [
     "+234 706 661 9598",
     "+234 701 378 4027",
-    "+234 906 875 5320",
   ],
 
   addresses: [
-    "Church Street, Kubwa, Abuja",
+    "Abuja, Nigeria",
     "No. 268, Kajola Street, Ikere-Ekiti, Ekiti State",
-    "Back of Crush Rock, Mpape, Abuja",
   ],
 
   about:
@@ -581,7 +579,7 @@ export const people: Person[] = [
   },
 
   {
-    name: "Seyi Fituyi",
+    name: "Seyi V. Fituyi",
 
     role: "Executive Director / Operations Lead",
 
@@ -686,7 +684,7 @@ export const people: Person[] = [
   },
 
   {
-    name: "Toyin",
+    name: "Toyin B. Akinola",
 
     role: "Client Relations",
 
