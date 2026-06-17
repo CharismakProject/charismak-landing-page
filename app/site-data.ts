@@ -579,7 +579,7 @@ export const people: Person[] = [
   },
 
   {
-    name: "Seyi V. Fituyi",
+    name: "Seyi Fituyi",
 
     role: "Executive Director / Operations Lead",
 
@@ -684,7 +684,7 @@ export const people: Person[] = [
   },
 
   {
-    name: "Toyin B. Akinola",
+    name: "Akinola Toyin",
 
     role: "Client Relations",
 
@@ -695,7 +695,7 @@ export const people: Person[] = [
     category: "Technical Associates",
 
     bio:
-      "bio: "Supports company administration, documentation, communication coordination, and corporate secretarial responsibilities.",
+      "Supports company administration, documentation, communication coordination, and corporate secretarial responsibilities."
   },
 
   {
