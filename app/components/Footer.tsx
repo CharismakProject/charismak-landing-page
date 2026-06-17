@@ -1,49 +1,22 @@
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { Download, Mail, MapPin, Phone } from "lucide-react";
 
 import { company, services } from "../site-data";
 
-const companyLinks = [
-  { label: "Company Profile", href: "/about" },
-  { label: "Vision & Mission", href: "/vision" },
-  { label: "Leadership", href: "/leadership" },
-  { label: "HSE & Quality", href: "/hse" },
-  { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/contact" },
+const quickLinks = [
+  { label: "Company", href: "#company" },
+  { label: "Services", href: "#services" },
+  { label: "Projects", href: "#projects" },
+  { label: "Leadership", href: "#leadership" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Footer() {
+  const whatsappLink =
+    "https://wa.me/2347066619598?text=Hello%20Charismak%20Project%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project.";
+
   return (
-    <footer className="bg-[#0D3B66] text-white">
-      <section className="border-b border-white/10 px-5 py-16 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.45fr] lg:items-center">
-          <div>
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-[#C8A45D]">
-              Start a Project
-            </p>
-
-            <h2 className="max-w-4xl text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
-              Let’s discuss your next construction requirement.
-            </h2>
-
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
-              Contact Charismak Project Nigeria Limited for building construction,
-              civil engineering, renovation, steel fabrication, project management,
-              and finishing works.
-            </p>
-          </div>
-
-          <div className="lg:text-right">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-[#8B1E00] px-8 py-4 font-bold text-white transition hover:bg-[#C8A45D]"
-            >
-              Request Quote <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
+    <footer className="bg-[#151B22] text-white">
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.25fr_0.75fr_0.75fr_1fr]">
           <div>
@@ -57,27 +30,40 @@ export default function Footer() {
 
             <p className="mt-6 max-w-md leading-7 text-white/65">
               A modern Nigerian construction company delivering civil engineering,
-              building construction, renovation, fabrication, project management,
-              and architectural finishing services.
+              building construction, renovation, steel fabrication, project
+              management, procurement, and finishing services.
             </p>
 
             <p className="mt-6 text-sm font-semibold text-white/45">
               {company.rcNumber}
             </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/company-profile.pdf"
+                className="inline-flex items-center gap-2 bg-[#8B1E00] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#C8A45D]"
+              >
+                Profile PDF <Download className="h-4 w-4" />
+              </Link>
+
+              <Link
+                href={whatsappLink}
+                target="_blank"
+                className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-sm font-bold text-white transition hover:border-[#C8A45D] hover:text-[#C8A45D]"
+              >
+                WhatsApp <Phone className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
 
           <div>
             <h4 className="text-sm font-bold uppercase tracking-[0.22em] text-[#C8A45D]">
-              Company
+              Quick Links
             </h4>
 
             <div className="mt-6 flex flex-col gap-3 text-sm text-white/65">
-              {companyLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="transition hover:text-white"
-                >
+              {quickLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="transition hover:text-white">
                   {link.label}
                 </Link>
               ))}
@@ -91,11 +77,7 @@ export default function Footer() {
 
             <div className="mt-6 flex flex-col gap-3 text-sm text-white/65">
               {services.slice(0, 6).map((service) => (
-                <Link
-                  key={service.title}
-                  href="/services"
-                  className="transition hover:text-white"
-                >
+                <Link key={service.title} href="#services" className="transition hover:text-white">
                   {service.title}
                 </Link>
               ))}
@@ -134,7 +116,7 @@ export default function Footer() {
             rights reserved.
           </p>
 
-          <p>Designed for construction, engineering, and project delivery.</p>
+          <p>Construction • Engineering • Project Delivery</p>
         </div>
       </section>
     </footer>
