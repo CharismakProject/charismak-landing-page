@@ -695,7 +695,7 @@ export const people: Person[] = [
     category: "Technical Associates",
 
     bio:
-      "Supports communication management, client coordination, and project relationship operations.",
+      "bio: "Supports company administration, documentation, communication coordination, and corporate secretarial responsibilities.",
   },
 
   {
