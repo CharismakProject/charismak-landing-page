@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Charismak Project Nigeria Limited",
   description:
-    "Premium construction, engineering, renovation, steel fabrication, and infrastructure solutions in Nigeria.",
+    "Construction, engineering, renovation, steel fabrication, project management, and infrastructure solutions in Nigeria.",
 };
 
 export default function RootLayout({
@@ -28,15 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-    >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-white text-[#151B22] antialiased">
         <Navbar />
-
-        <main>{children}</main>
-
+        {children}
         <Footer />
       </body>
     </html>
